@@ -1,6 +1,6 @@
 package com.aston.restjdbctest.utils;
 
-public class BookSqlQuerry {
+public class BookSqlQuery {
     public static final String INSERT_INTO_BOOK = "INSERT INTO book (title, author, price) VALUES (?, ?, ?)";
     public static final String DELETE_FROM_BOOK = "DELETE FROM book where book_id = ?";
     public static final String SELECT_FROM_BOOK = "SELECT * FROM book";
