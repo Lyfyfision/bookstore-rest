@@ -14,8 +14,10 @@
           <element id="module-output" name="restjdbctest" />
         </element>
         <element id="directory" name="lib">
+          <element id="library" level="project" name="Maven: org.mapstruct:mapstruct:1.5.5.Final" />
           <element id="library" level="project" name="Maven: org.postgresql:postgresql:42.6.0" />
           <element id="library" level="project" name="Maven: org.checkerframework:checker-qual:3.31.0" />
+          <element id="library" level="project" name="Maven: jstl:jstl:1.2" />
         </element>
       </element>
       <element id="directory" name="META-INF">

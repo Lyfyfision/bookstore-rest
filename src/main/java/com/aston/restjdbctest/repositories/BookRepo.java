@@ -1,5 +1,6 @@
 package com.aston.restjdbctest.repositories;
 
+import com.aston.restjdbctest.dto.BookDto;
 import com.aston.restjdbctest.entities.Book;
 
 import java.sql.SQLException;

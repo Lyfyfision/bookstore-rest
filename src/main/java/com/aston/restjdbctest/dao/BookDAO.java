@@ -1,5 +1,6 @@
 package com.aston.restjdbctest.dao;
 
+import com.aston.restjdbctest.dto.BookDto;
 import com.aston.restjdbctest.entities.Book;
 import com.aston.restjdbctest.repositories.BookRepo;
 
