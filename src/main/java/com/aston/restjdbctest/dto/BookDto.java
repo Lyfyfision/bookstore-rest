@@ -1,54 +1,76 @@
 package com.aston.restjdbctest.dto;
 
 import java.io.Serializable;
-import java.util.Objects;
 
 /**
  * A DTO for the {@link com.aston.restjdbctest.entities.Book} entity
  */
 public class BookDto implements Serializable {
+    private final int id;
     private final String title;
-    private final String author;
     private final float price;
+    private final int authorId;
+    private final int publisherId;
 
-    public BookDto(String title, String author, float price) {
+    public BookDto(int id, String title, float price, int authorId, int publisherId) {
+        this.id = id;
         this.title = title;
-        this.author = author;
         this.price = price;
+        this.publisherId = publisherId;
+        this.authorId = authorId;
+    }
+    public int getId() {
+        return id;
     }
 
     public String getTitle() {
         return title;
     }
 
-    public String getAuthor() {
-        return author;
-    }
-
     public float getPrice() {
         return price;
+    }
+
+    public int getAuthorId() {
+        return authorId;
+    }
+
+    public int getPublisherId() {
+        return publisherId;
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        BookDto entity = (BookDto) o;
-        return Objects.equals(this.title, entity.title) &&
-                Objects.equals(this.author, entity.author) &&
-                Objects.equals(this.price, entity.price);
+
+        BookDto bookDto = (BookDto) o;
+
+        if (id != bookDto.id) return false;
+        if (Float.compare(bookDto.price, price) != 0) return false;
+        if (authorId != bookDto.authorId) return false;
+        if (publisherId != bookDto.publisherId) return false;
+        return title.equals(bookDto.title);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(title, author, price);
+        int result = id;
+        result = 31 * result + title.hashCode();
+        result = 31 * result + (price != +0.0f ? Float.floatToIntBits(price) : 0);
+        result = 31 * result + authorId;
+        result = 31 * result + publisherId;
+        return result;
     }
 
     @Override
     public String toString() {
-        return getClass().getSimpleName() + "(" +
-                "title = " + title + ", " +
-                "author = " + author + ", " +
-                "price = " + price + ")";
+        return "BookDto{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", price=" + price +
+                ", authorId=" + authorId +
+                ", publisherId=" + publisherId +
+                '}';
     }
 }

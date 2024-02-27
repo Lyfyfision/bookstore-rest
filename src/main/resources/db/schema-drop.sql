@@ -1,0 +1,4 @@
+DROP TABLE book CASCADE;
+DROP TABLE author CASCADE;
+DROP TABLE book_publisher CASCADE;
+DROP TABLE publisher CASCADE;

@@ -15,9 +15,7 @@ public class AuthorDAO implements AuthorRepo {
     public void insertAuthor(Author author) {
         try(Connection connection = getConnection();
         PreparedStatement ps = connection.prepareStatement(INSERT_INTO_AUTHOR)) {
-            ps.setString(1, author.getFirstName());
-            ps.setString(2, author.getLastName());
-            ps.setString(3, author.getBook());
+            ps.setString(1, author.getName());
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
@@ -37,9 +35,8 @@ public class AuthorDAO implements AuthorRepo {
     public void updateAuthor(Author author) {
         try(Connection connection = getConnection();
         PreparedStatement ps = connection.prepareStatement(UPDATE_AUTHOR)) {
-            ps.setString(1, author.getFirstName());
-            ps.setString(2, author.getLastName());
-            ps.setString(3, author.getBook());
+            ps.setString(1, author.getName());
+            ps.setInt(2, author.getId());
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
@@ -50,12 +47,11 @@ public class AuthorDAO implements AuthorRepo {
         Author author = null;
         try(Connection connection = getConnection();
         PreparedStatement ps = connection.prepareStatement(GET_AUTHOR)) {
+            ps.setInt(1, authorId);
             try(ResultSet resultSet = ps.executeQuery()) {
                 if (resultSet.next()) {
-                    String firstName = resultSet.getString("firstName");
-                    String lastName = resultSet.getString("lastName");
-                    String book = resultSet.getString("book");
-                    author = new Author(firstName, lastName, book);
+                    String name = resultSet.getString("name");
+                    author = new Author(authorId, name);
                 }
             }
         } catch (SQLException ex) {
@@ -69,13 +65,12 @@ public class AuthorDAO implements AuthorRepo {
         List<Author> authors = new ArrayList<>();
         try(Connection connection = getConnection();
         Statement statement = connection.createStatement()) {
-            try(ResultSet resultSet = statement.executeQuery(SELECT_FROM_AUTHOR)) {
+            try(ResultSet resultSet = statement.executeQuery(SELECT_FROM_AUTHOR);
+                ResultSet keys = statement.getGeneratedKeys()) {
                 while (resultSet.next()) {
-                    int id = resultSet.getInt("author_id");
-                    String firstName = resultSet.getString("firstName");
-                    String lastName = resultSet.getString("lastName");
-                    String book = resultSet.getString("book");
-                    Author author = new Author(id, firstName, lastName, book);
+                    int id = keys.getInt(1);
+                    String name = resultSet.getString("name");
+                    Author author = new Author(id, name);
                     authors.add(author);
                 }
             }

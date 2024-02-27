@@ -13,16 +13,27 @@ import static com.aston.restjdbctest.utils.JDBCUtils.*;
 
 public class BookDAO implements BookRepo {
 
+    private BookPublisherDao bookPublisherDao;
+
+    public void setBookPublisherDao(BookPublisherDao bookPublisherDao) {
+        this.bookPublisherDao = bookPublisherDao;
+    }
+
     @Override
-    public void insertBook(Book book) {
+    public void insertBook(BookDto book) {
         try(Connection connection = getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement(INSERT_INTO_BOOK)) {
             preparedStatement.setString(1, book.getTitle());
-            preparedStatement.setString(2, book.getAuthor());
-            preparedStatement.setFloat(3, book.getPrice());
+            preparedStatement.setFloat(2, book.getPrice());
+            preparedStatement.setInt(3, book.getAuthorId());
+            preparedStatement.setInt(4, book.getPublisherId());
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
+        //TODO - add mapping to junction table
+//        for (int publisherId : book.getPublishers()) {
+//            bookPublisherDao.insertBookPublisher(book.getId(), publisherId);
+//        }
     }
 
     @Override
@@ -40,8 +51,10 @@ public class BookDAO implements BookRepo {
         try(Connection connection = getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement(UPDATE_BOOK)) {
             preparedStatement.setString(1, book.getTitle());
-            preparedStatement.setString(2, book.getAuthor());
-            preparedStatement.setFloat(3, book.getPrice());
+            preparedStatement.setFloat(2, book.getPrice());
+            preparedStatement.setInt(3, book.getAuthorId());
+            preparedStatement.setInt(4, book.getPublisherId());
+            preparedStatement.setInt(5, book.getId());
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
@@ -56,9 +69,10 @@ public class BookDAO implements BookRepo {
             try(ResultSet result = preparedStatement.executeQuery()) {
                 if(result.next()) {
                     String title = result.getString("title");
-                    String author = result.getString("author");
                     float price = result.getFloat("price");
-                    book = new Book(bookId, title, author, price);
+                    int authorId = result.getInt("author_id");
+                    int publisherId = result.getInt("publisher_id");
+                    book = new Book(bookId, title, price, authorId, publisherId);
                 }
             }
         } catch (SQLException ex) {
@@ -72,13 +86,15 @@ public class BookDAO implements BookRepo {
         List<Book> bookList = new ArrayList<>();
         try(Connection connection = getConnection();
             Statement statement = connection.createStatement()) {
-            try(ResultSet result = statement.executeQuery(SELECT_FROM_BOOK)) {
+            try(ResultSet result = statement.executeQuery(SELECT_FROM_BOOK);
+                ResultSet keys = statement.getGeneratedKeys()) {
                 while(result.next()) {
-                    int id = result.getInt("book_id");
+                    int id = keys.getInt(1);
                     String title = result.getString("title");
-                    String author = result.getString("author");
                     float price = result.getFloat("price");
-                    Book book = new Book(id, title, author, price);
+                    int authorId = result.getInt("author_id");
+                    int publisherId = result.getInt("publisher_id");
+                    Book book = new Book(id, title, price, authorId, publisherId);
                     bookList.add(book);
                 }
             }
@@ -86,5 +102,28 @@ public class BookDAO implements BookRepo {
             ex.printStackTrace();
         }
         return bookList;
+    }
+
+    @Override
+    public List<Book> getBooksByAuthorId(int authorId) {
+        List<Book> authorBooks = new ArrayList<>();
+        try(Connection connection = getConnection();
+            PreparedStatement statement = connection.prepareStatement(GET_AUTHOR_BOOKS)) {
+            statement.setInt(1, authorId);
+            try(ResultSet result = statement.executeQuery();
+                ResultSet keys = statement.getGeneratedKeys()) {
+                while(result.next()) {
+                    int id = keys.getInt(1);
+                    String title = result.getString("title");
+                    float price = result.getFloat("price");
+                    int publisherId = result.getInt("publisher_id");
+                    Book book = new Book(id, title, price, authorId, publisherId);
+                    authorBooks.add(book);
+                }
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return authorBooks;
     }
 }

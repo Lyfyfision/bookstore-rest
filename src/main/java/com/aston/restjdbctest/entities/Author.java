@@ -3,23 +3,18 @@ package com.aston.restjdbctest.entities;
 public class Author {
 
     private int id;
-    private String firstName;
-    private String lastName;
-    private String book;
+    private String name;
 
-    public Author(int id, String firstName, String lastName, String book) {
+    public Author(int id, String name) {
         this.id = id;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.book = book;
+        this.name = name;
     }
 
-    public Author() {}
+    public Author(String name) {
+        this.name = name;
+    }
 
-    public Author(String firstName, String lastName, String book) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.book = book;
+    public Author() {
     }
 
     public int getId() {
@@ -30,27 +25,11 @@ public class Author {
         this.id = id;
     }
 
-    public String getFirstName() {
-        return firstName;
+    public String getName() {
+        return name;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
-    public String getBook() {
-        return book;
-    }
-
-    public void setBook(String book) {
-        this.book = book;
+    public void setName(String name) {
+        this.name = name;
     }
 }

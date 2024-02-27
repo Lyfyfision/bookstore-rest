@@ -1,54 +1,50 @@
 package com.aston.restjdbctest.dto;
 
 import java.io.Serializable;
-import java.util.Objects;
 
 /**
  * A DTO for the {@link com.aston.restjdbctest.entities.Author} entity
  */
 public class AuthorDto implements Serializable {
-    private final String firstName;
-    private final String lastName;
-    private final String book;
+    private final int id;
+    private final String name;
 
-    public AuthorDto(String firstName, String lastName, String book) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.book = book;
+    public AuthorDto(int id, String name) {
+        this.id = id;
+        this.name = name;
     }
 
-    public String getFirstName() {
-        return firstName;
+    public int getId() {
+        return id;
     }
 
-    public String getLastName() {
-        return lastName;
-    }
-
-    public String getBook() {
-        return book;
+    public String getName() {
+        return name;
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        AuthorDto entity = (AuthorDto) o;
-        return Objects.equals(this.firstName, entity.firstName) &&
-                Objects.equals(this.lastName, entity.lastName) &&
-                Objects.equals(this.book, entity.book);
+
+        AuthorDto authorDto = (AuthorDto) o;
+
+        if (id != authorDto.id) return false;
+        return name.equals(authorDto.name);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(firstName, lastName, book);
+        int result = id;
+        result = 31 * result + name.hashCode();
+        return result;
     }
 
     @Override
     public String toString() {
-        return getClass().getSimpleName() + "(" +
-                "firstName = " + firstName + ", " +
-                "lastName = " + lastName + ", " +
-                "book = " + book + ")";
+        return "AuthorDto{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                '}';
     }
 }

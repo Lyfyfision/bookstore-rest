@@ -1,28 +1,32 @@
 package com.aston.restjdbctest.entities;
 
+import java.util.List;
+
 public class Book {
     private int id;
     private String title;
-    private String author;
     private float price;
+    private int authorId;
+    private int publisherId;
+    private List<Publisher> publishers;
+    private List<Author> authors;
 
-    public Book(int id, String title, String author, float price) {
-        this.id = id;
-        this.title = title;
-        this.author = author;
-        this.price = price;
+    public Book() {
     }
 
-    public Book(int id) {
+    public Book(int id, String title, float price, int authorId, int publisherId) {
         this.id = id;
+        this.title = title;
+        this.price = price;
+        this.authorId = authorId;
+        this.publisherId = publisherId;
     }
 
-    public Book() {}
-
-    public Book(String title, String author, float price) {
+    public Book(String title, float price, int authorId, int publisherId) {
         this.title = title;
-        this.author = author;
         this.price = price;
+        this.authorId = authorId;
+        this.publisherId = publisherId;
     }
 
     public int getId() {
@@ -41,19 +45,43 @@ public class Book {
         this.title = title;
     }
 
-    public String getAuthor() {
-        return author;
-    }
-
-    public void setAuthor(String author) {
-        this.author = author;
-    }
-
     public float getPrice() {
         return price;
     }
 
     public void setPrice(float price) {
         this.price = price;
+    }
+
+    public List<Publisher> getPublishers() {
+        return publishers;
+    }
+
+    public void setPublishers(List<Publisher> publishers) {
+        this.publishers = publishers;
+    }
+
+    public List<Author> getAuthors() {
+        return authors;
+    }
+
+    public void setAuthors(List<Author> authors) {
+        this.authors = authors;
+    }
+
+    public int getAuthorId() {
+        return authorId;
+    }
+
+    public void setAuthorId(int authorId) {
+        this.authorId = authorId;
+    }
+
+    public int getPublisherId() {
+        return publisherId;
+    }
+
+    public void setPublisherId(int publisherId) {
+        this.publisherId = publisherId;
     }
 }
