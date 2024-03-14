@@ -1,26 +1,22 @@
 package com.aston.restjdbctest.entities;
 
 import java.util.List;
-import java.util.Set;
 
 public class Publisher {
     private int id;
-    private String name;
-    private Set<Book> books;
+    private String publisherName;
+    private List<Book> books;
 
-    public Publisher(int id, String name) {
+    public Publisher(int id, String publisherName) {
         this.id = id;
-        this.name = name;
+        this.publisherName = publisherName;
     }
 
-    public Publisher() {}
-
-    public Publisher(int id) {
-        this.id = id;
+    public Publisher(String publisherName) {
+        this.publisherName = publisherName;
     }
 
-    public Publisher(String name) {
-        this.name = name;
+    public Publisher() {
     }
 
     public int getId() {
@@ -31,19 +27,19 @@ public class Publisher {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getPublisherName() {
+        return publisherName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setPublisherName(String publisherName) {
+        this.publisherName = publisherName;
     }
 
-    public Set<Book> getBooks() {
+    public List<Book> getBooks() {
         return books;
     }
 
-    public void setBooks(Set<Book> books) {
+    public void setBooks(List<Book> books) {
         this.books = books;
     }
 }

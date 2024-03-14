@@ -1,69 +1,39 @@
 package com.aston.restjdbctest.utils;
 
 
-import java.lang.reflect.Field;
-import java.lang.reflect.InvocationTargetException;
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+
+/**
+ * Utility class for managing connection to DB
+ */
 
 public class JDBCUtils {
-    private static final String jdbcURL = "jdbc:postgresql://localhost:3306/bookstore";
-    private static final String jdbcUsername = "root";
-    private static final String jdbcPassword = "root";
+    private static final String JDBC_URL = "jdbc:postgresql://localhost:5432/bookstore";
+    private static final String JDBC_DRIVER = "org.postgresql.Driver";
+    private static final String JDBC_USERNAME = "root";
+    private static final String JDBC_PASSWORD = "root";
 
     public static Connection getConnection() {
         Connection connection = null;
         try {
-            connection = DriverManager.getConnection(jdbcURL, jdbcUsername, jdbcPassword);
-        } catch (SQLException exception) {
-            exception.getMessage();
+            Class.forName(JDBC_DRIVER);
+            connection = DriverManager.getConnection(JDBC_URL, JDBC_USERNAME, JDBC_PASSWORD);
+        } catch (SQLException | ClassNotFoundException ex) {
+            ex.getMessage();
         }
         return connection;
     }
 
-    public static void disconnect() throws SQLException {
-        if (getConnection().isClosed() || getConnection() == null) {
-            getConnection().close();
+    public static Connection getConnection(String url, String username, String pass) {
+        Connection connection = null;
+        try {
+            Class.forName(JDBC_DRIVER);
+            connection = DriverManager.getConnection(url, username, pass);
+        } catch (SQLException | ClassNotFoundException ex) {
+            ex.getMessage();
         }
-    }
-
-    /**
-     * Method help to convert SQL request data to your custom DTO Java class object.
-     * Requirements: fields of your Java class should have Type: String and have the same name as in sql table
-     *
-     * @param resultSet     - sql-request result
-     * @param clazz - Your DTO Class for mapping
-     * @return <T> List <T> - List of converted DTO java class objects
-     */
-    public static <T> List<T> convertSQLResultSetToObject(ResultSet resultSet, Class<T> clazz)
-            throws SQLException, NoSuchMethodException, InvocationTargetException, InstantiationException, IllegalAccessException {
-
-        List<Field> fields = Arrays.asList(clazz.getDeclaredFields());
-        for(Field field: fields) {
-            field.setAccessible(true);
-        }
-
-        List<T> list = new ArrayList<>();
-        while(resultSet.next()) {
-
-            T dto = clazz.getConstructor().newInstance();
-
-            for(Field field: fields) {
-                String name = field.getName();
-                try{
-                    String value = resultSet.getString(name);
-                    field.set(dto, field.getType().getConstructor(String.class).newInstance(value));
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-            list.add(dto);
-        }
-        return list;
+        return connection;
     }
 }

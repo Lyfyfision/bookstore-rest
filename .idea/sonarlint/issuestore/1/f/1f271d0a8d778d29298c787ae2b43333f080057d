@@ -1,0 +1,9 @@
+
+O
+java:S1948"2Make "bookPublisherDao" transient or serializable.(´€ÚŽ8Þ¯Êøà1
+‹
+java:S1130!"nRemove the declaration of thrown exception 'java.sql.SQLException', as it cannot be thrown from method's body.(°ü›¼8äˆÑøà1
+–
+java:S1130!"yRemove the declaration of thrown exception 'jakarta.servlet.ServletException', as it cannot be thrown from method's body.(°ü›¼8äˆÑøà1
+\
+java:S1128"?Remove this unused import 'com.aston.restjdbctest.dao.BookDAO'.(Å”ªû8´¶Ëøà1

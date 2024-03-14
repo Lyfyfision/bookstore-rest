@@ -8,8 +8,8 @@ import java.util.List;
 
 public interface BookRepo {
     void insertBook(BookDto book) throws SQLException;
-    void deleteBookById(Book book);
-    void updateBookById(Book book);
+    void deleteBookById(int bookId);
+    void updateBookById(int bookId, BookDto book);
     Book getBookById(int bookId);
     List<Book> getAllBooks();
     List<Book> getBooksByAuthorId(int authorId);

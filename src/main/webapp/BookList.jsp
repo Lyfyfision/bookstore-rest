@@ -2,7 +2,7 @@
 <!DOCTYPE>
 <html lang="en">
 <head>
-    <title>Book Store App</title>
+    <title>Book's List</title>
 </head>
 <body>
 <div style="text-align: center;">
@@ -11,7 +11,6 @@
         <a href="/new">Add New Book</a>
         &nbsp;&nbsp;&nbsp;
         <a href="/list">List All Books</a>
-
     </h2>
 </div>
 <div>
@@ -20,16 +19,15 @@
         <tr>
             <th>ID</th>
             <th>Title</th>
-            <th>Author</th>
             <th>Price</th>
-            <th>Actions</th>
+            <th>AuthorID</th>
         </tr>
         <c:forEach var="book" items="${listBook}">
             <tr>
                 <td><c:out value="${book.id}" /></td>
                 <td><c:out value="${book.title}" /></td>
-                <td><c:out value="${book.author}" /></td>
                 <td><c:out value="${book.price}" /></td>
+                <td><c:out value="${book.author_id}" /></td>
                 <td>
                     <a href="/edit?id=<c:out value='${book.id}' />">Edit</a>
                     &nbsp;&nbsp;&nbsp;&nbsp;

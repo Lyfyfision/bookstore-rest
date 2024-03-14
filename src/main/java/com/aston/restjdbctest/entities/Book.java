@@ -7,26 +7,22 @@ public class Book {
     private String title;
     private float price;
     private int authorId;
-    private int publisherId;
     private List<Publisher> publishers;
-    private List<Author> authors;
 
     public Book() {
     }
 
-    public Book(int id, String title, float price, int authorId, int publisherId) {
+    public Book(int id, String title, float price, int authorId) {
         this.id = id;
         this.title = title;
         this.price = price;
         this.authorId = authorId;
-        this.publisherId = publisherId;
     }
 
-    public Book(String title, float price, int authorId, int publisherId) {
+    public Book(String title, float price, int authorId) {
         this.title = title;
         this.price = price;
         this.authorId = authorId;
-        this.publisherId = publisherId;
     }
 
     public int getId() {
@@ -61,27 +57,11 @@ public class Book {
         this.publishers = publishers;
     }
 
-    public List<Author> getAuthors() {
-        return authors;
-    }
-
-    public void setAuthors(List<Author> authors) {
-        this.authors = authors;
-    }
-
     public int getAuthorId() {
         return authorId;
     }
 
     public void setAuthorId(int authorId) {
         this.authorId = authorId;
-    }
-
-    public int getPublisherId() {
-        return publisherId;
-    }
-
-    public void setPublisherId(int publisherId) {
-        this.publisherId = publisherId;
     }
 }

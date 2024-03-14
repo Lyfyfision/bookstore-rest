@@ -1,0 +1,20 @@
+
+ž
+java:S1186."€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(‹¨¯¿8Òó¦ôà1
+u
+java:S1450"XRemove the "authorDAO" field and declare it as a local variable in the relevant methods.(Ù•¿Õ8Ùó¦ôà1
+‰
+java:S1130#"lRemove the declaration of thrown exception 'java.io.IOException', as it cannot be thrown from method's body.(°ü›¼8„Ã‡øà1
+‹
+java:S1130#"nRemove the declaration of thrown exception 'java.sql.SQLException', as it cannot be thrown from method's body.(°ü›¼8…Ã‡øà1
+–
+java:S1130#"yRemove the declaration of thrown exception 'jakarta.servlet.ServletException', as it cannot be thrown from method's body.(°ü›¼8†Ã‡øà1
+^
+java:S1172""<Remove these unused method parameters "request", "response".(Ùò¾©üÿÿÿÿ8‡Ã‡øà1
+]	java:S125$"<This block of commented-out lines of code should be removed.(ìÓ›ˆøÿÿÿÿ8ˆÃ‡øà1
+\
+java:S1128"?Remove this unused import 'com.aston.restjdbctest.dao.BookDAO'.(Å”ªû8êŒŒøà1
+^
+java:S1128"ARemove this unused import 'com.aston.restjdbctest.entities.Book'.(–õšè8êŒŒøà1
+f
+java:S1128"DRemove this unused import 'com.aston.restjdbctest.utils.BookMapper'.(ˆöÃ˜ûÿÿÿÿ8îŒŒøà1
