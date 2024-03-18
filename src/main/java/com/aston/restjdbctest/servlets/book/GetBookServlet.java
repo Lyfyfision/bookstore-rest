@@ -2,8 +2,6 @@ package com.aston.restjdbctest.servlets.book;
 
 import com.aston.restjdbctest.dao.BookDAO;
 import com.aston.restjdbctest.dto.BookDto;
-import com.aston.restjdbctest.entities.Book;
-import com.aston.restjdbctest.utils.BookMapper;
 import com.aston.restjdbctest.utils.JDBCUtils;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
@@ -26,7 +24,9 @@ public class GetBookServlet extends HttpServlet {
         BookDto book;
         book = getBook(request,response);
         assert book != null;
-        response.setStatus(HttpServletResponse.SC_OK);
+        response.getWriter().println("<h1>This is your Book</h1>");
+        response.getWriter().print("<table border='1' width='100%'");
+        response.getWriter().print("<tr><th>Id</th><th>Title</th><th>Price</th></tr>");
         response.getWriter().print("<tr><td>" + book.getId() + " "
                 + "</td><td>" + book.getTitle() + " "
                 + "</td><td>" + book.getPrice()
@@ -35,11 +35,10 @@ public class GetBookServlet extends HttpServlet {
 
     private BookDto getBook(HttpServletRequest request, HttpServletResponse response) {
         int bookId = Integer.parseInt(request.getParameter("book_id"));
-        Book book = bookDAO.getBookById(bookId);
+        BookDto book = bookDAO.getBookById(bookId);
         book.setId(bookId);
-        BookDto returnedBook = BookMapper.instance.toDto(book);
         response.setStatus(HttpServletResponse.SC_OK);
-        return returnedBook;
+        return book;
     }
 
 

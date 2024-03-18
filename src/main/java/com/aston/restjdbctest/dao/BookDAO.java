@@ -54,8 +54,8 @@ public class BookDAO implements BookRepo {
     }
 
     @Override
-    public Book getBookById(int bookId) {
-        Book book = null;
+    public BookDto getBookById(int bookId) {
+        BookDto book = null;
         try(PreparedStatement preparedStatement = connection.prepareStatement(GET_BOOK)) {
             preparedStatement.setInt(1, bookId);
             try(ResultSet result = preparedStatement.executeQuery()) {
@@ -63,7 +63,7 @@ public class BookDAO implements BookRepo {
                     String title = result.getString("title");
                     float price = result.getFloat("price");
                     int authorId = result.getInt("author_id");
-                    book = new Book(bookId, title, price, authorId);
+                    book = new BookDto(bookId, title, price, authorId);
                 }
             }
         } catch (SQLException ex) {

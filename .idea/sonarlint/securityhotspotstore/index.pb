@@ -63,3 +63,11 @@ Dsrc/main/java/com/aston/restjdbctest/repositories/PublisherRepo.java,d/d/ddd40
 pom.xml,4/4/442292b8a7efeabbe4cc176709b833b1792140ec
 r
 Bsrc/test/java/com/aston/restjdbctest/repositories/BookDAOTest.java,0/3/0387a626ca353a405d1dd340359616e844691797
+t
+Dsrc/test/java/com/aston/restjdbctest/repositories/AuthorDAOTest.java,2/c/2c065222175a8e797101231e73fe4c6258a4e750
+z
+Jsrc/main/java/com/aston/restjdbctest/servlets/book/GetAllBooksServlet.java,1/b/1bcabfc2070d6e83130acf4bd4522f5e37483ea9
+y
+Isrc/main/java/com/aston/restjdbctest/servlets/book/DeleteBookServlet.java,5/7/577c2c2d8a72d22a0d305721d1695854f90980c3
+x
+Hsrc/test/java/com/aston/restjdbctest/servlets/book/BookServletsTest.java,1/5/1528c52fcb508d40958e3c6ee538463ab0b18748

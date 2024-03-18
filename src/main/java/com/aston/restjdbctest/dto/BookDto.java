@@ -6,7 +6,7 @@ import java.io.Serializable;
  * A DTO for the {@link com.aston.restjdbctest.entities.Book} entity
  */
 public class BookDto implements Serializable {
-    private final int id;
+    private int id;
     private final String title;
     private final float price;
     private final int authorId;
@@ -32,6 +32,10 @@ public class BookDto implements Serializable {
 
     public int getId() {
         return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     @Override
